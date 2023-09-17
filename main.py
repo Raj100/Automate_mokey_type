@@ -10,6 +10,9 @@ import pyautogui
 from bs4 import BeautifulSoup
 import requests
 
+
+
+
 os.environ['PATH'] += r"/Users/raj/Documents/Python/chromedriver_mac64"
 driver = webdriver.Chrome()
 driver.get("https://monkeytype.com")
@@ -18,44 +21,38 @@ driver.maximize_window()
 driver.implicitly_wait(10)
 time.sleep(2)
 words = driver.find_element(By.ID, "typingTest")
-l=[]
-l=words.text
+l = []
+l = words.text
 l = l.replace("english", "", 1)
-l=l.split()
-print(l)
-t_end = time.time() + 30
-word = l[0]
-i = 0
-n = len(l)-1
-print(n)
+l = l.split()
+nl=len(l)-1
+def convert(l):
+    return ' '.join(l)
+
+
+t_end=time.time()+30
 while t_end >= time.time():
-    pyautogui.typewrite(word)
+    w=convert(l)
+    print(w)
+    pyautogui.typewrite(w)
     pyautogui.typewrite(" ")
-    i += 1
-    if i == n:
-        print('enytr at=' + str(i))
-        words = driver.find_element(By.ID, "typingTest")
-        a=words.text
-        a=a.split()
-        #print(l)
-        n = len(a) - 1
-        j=0
-        while a[n-j] != word and a[n-j-1] != l[i-2]:
-            j+= 1
-        l= a[n - j+1:]
-        n = len(l) - 1
-        #print(l)
-        #print(n)
-        i=0
-    word = l[i]
+    words = driver.find_element(By.ID, "typingTest")
+    a = words.text
+    a = a.split()
+    # print(l)
+    n = len(a)-1
+    j = 0
+    while a[n - j] != l[nl] and a[n - j - 1] != l[nl - 1] and n-j>=0 and n-j-1>=0 :
+        j+= 1
+    l = a[n - j + 1:]
+    nl = len(l) - 1
 
-#pyautogui.typewrite('\n')
+# print(l)
+# print(n)
 
+#i = 0
 
-time.sleep(5)
+# pyautogui.typewrite('\n')
+time.sleep(10)
 
 driver.quit()
-
-
-
-
