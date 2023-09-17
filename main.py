@@ -29,27 +29,27 @@ i = 0
 n = len(l)-1
 print(n)
 while t_end >= time.time():
-    pyautogui.typewrite(word, interval=0.000001)
-    pyautogui.typewrite(" ", interval=0.000001)
+    pyautogui.typewrite(word)
+    pyautogui.typewrite(" ")
     i += 1
     if i == n:
         print('enytr at=' + str(i))
         words = driver.find_element(By.ID, "typingTest")
-        l=words.text
-        l=l.split()
-        print(l)
-        n = len(l) - 1
+        a=words.text
+        a=a.split()
+        #print(l)
+        n = len(a) - 1
         j=0
-        while l[n-j] != word:
+        while a[n-j] != word and a[n-j-1] != l[i-2]:
             j+= 1
-        l= l[n - j+1:]
+        l= a[n - j+1:]
         n = len(l) - 1
-        print(l)
-        print(n)
+        #print(l)
+        #print(n)
         i=0
     word = l[i]
 
-pyautogui.typewrite('\n')
+#pyautogui.typewrite('\n')
 
 
 time.sleep(5)
