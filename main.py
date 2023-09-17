@@ -10,52 +10,49 @@ import pyautogui
 from bs4 import BeautifulSoup
 import requests
 
-"""
-# assign URL
-url = "https://monkeytype.com/"
-
-html_content = requests.get(url).text
-
-soup = BeautifulSoup(html_content, "html.parser")
-
-text= soup.find('typingTest')
-print(text)
-"""
 os.environ['PATH'] += r"/Users/raj/Documents/Python/chromedriver_mac64"
 driver = webdriver.Chrome()
 driver.get("https://monkeytype.com")
 driver.maximize_window()
-"""
-try:
-    element = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.ID, "myDynamicElement"))
-    )
-except:
-    driver.quit()
-"""
-driver.implicitly_wait(10)
-"""
-reject = driver.find_element(By.__class__, 'button_rejectAll')
-reject.click()
-"""
 
+driver.implicitly_wait(10)
+time.sleep(2)
 words = driver.find_element(By.ID, "typingTest")
-a=[]
+l=[]
 l=words.text
-a = a.replace("english", "", 1)
+l = l.replace("english", "", 1)
 l=l.split()
 print(l)
 t_end = time.time() + 30
-for word in l:
-    pyautogui.typewrite(word, interval=0.1)
-    pyautogui.typewrite(" ", interval=0.1)
-    if t_end <= time.time():
-        break
+word = l[0]
+i = 0
+n = len(l)-1
+print(n)
+while t_end >= time.time():
+    pyautogui.typewrite(word, interval=0.000001)
+    pyautogui.typewrite(" ", interval=0.000001)
+    i += 1
+    if i == n:
+        print('enytr at=' + str(i))
+        words = driver.find_element(By.ID, "typingTest")
+        l=words.text
+        l=l.split()
+        print(l)
+        n = len(l) - 1
+        j=0
+        while l[n-j] != word:
+            j+= 1
+        l= l[n - j+1:]
+        n = len(l) - 1
+        print(l)
+        print(n)
+        i=0
+    word = l[i]
+
 pyautogui.typewrite('\n')
 
 
 time.sleep(5)
-print(driver.title)
 
 driver.quit()
 
