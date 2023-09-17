@@ -10,6 +10,7 @@ import pyautogui
 from bs4 import BeautifulSoup
 import requests
 
+"""
 # assign URL
 url = "https://monkeytype.com/"
 
@@ -19,6 +20,7 @@ soup = BeautifulSoup(html_content, "html.parser")
 
 text= soup.find('typingTest')
 print(text)
+"""
 os.environ['PATH'] += r"/Users/raj/Documents/Python/chromedriver_mac64"
 driver = webdriver.Chrome()
 driver.get("https://monkeytype.com")
